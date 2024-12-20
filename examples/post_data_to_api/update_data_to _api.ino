@@ -38,7 +38,14 @@ void setup() {
   }
   Serial.println("\nWiFi terhubung");
 
-  String response = asnproject.get(serverName);
+  // Create JSON
+  StaticJsonDocument<200> jsonDoc;
+  // Add id to update data
+  jsonDoc["id"] = 1;
+  jsonDoc["time"] = 671;
+  jsonDoc["voltage"] = 21343;
+
+  String response = asnproject.update(serverName, jsonDoc);
   Serial.println("Server Response: " + response);
 }
 

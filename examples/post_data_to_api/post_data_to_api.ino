@@ -29,7 +29,7 @@ const char* serverName = "http://your-name-server/endpoint"; // Change this with
 void setup() {
   Serial.begin(115200);
 
-  // Hubungkan ke Wi-Fi
+  // Connect to Wi-Fi
   WiFi.begin(ssid, password);
   Serial.print("Menghubungkan ke WiFi");
   while (WiFi.status() != WL_CONNECTED) {
@@ -38,7 +38,7 @@ void setup() {
   }
   Serial.println("\nWiFi terhubung");
 
-  // Buat JSON
+  // Create JSON
   StaticJsonDocument<200> jsonDoc;
   jsonDoc["time"] = 671;
   jsonDoc["voltage"] = 21343;

@@ -66,3 +66,29 @@ String ASNProject::get(const char* serverUrl) {
     }
 }
 
+// UPDATE Data
+String ASNProject::update(const char* serverUrl, StaticJsonDocument<200>& jsonDoc) {
+    if (WiFi.status() == WL_CONNECTED) {
+        HTTPClient http;
+        http.begin(serverUrl);
+        http.addHeader("Content-Type", "application/json");
+
+        String jsonData;
+        serializeJson(jsonDoc, jsonData);
+
+        int httpResponseCode = http.POST(jsonData);
+
+        String response;
+        if (httpResponseCode > 0) {
+            response = http.getString();
+        } else {
+            response = "Error: " + String(http.errorToString(httpResponseCode));
+        }
+
+        http.end();
+        return response;
+    } else {
+        return "Error: Wifi not connected.";
+    }
+}
+

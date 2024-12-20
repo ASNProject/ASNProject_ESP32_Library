@@ -20,3 +20,4 @@
 - Create initial project
 - Add POST ESP32 Data to API
 - Add GET data from API
+- Add UPDATE data to API

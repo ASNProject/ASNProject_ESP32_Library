@@ -11,6 +11,7 @@ class ASNProject {
         ASNProject();
         String send(const char* serverUrl, StaticJsonDocument<200>& jsonDoc);
         String get(const char* serverUrl);
+        String update(const char* serverUrl, StaticJsonDocument<200>& jsonDoc);
 };
 
 #endif
