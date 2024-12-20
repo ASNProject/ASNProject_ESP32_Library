@@ -10,6 +10,7 @@ class ASNProject {
     public:
         ASNProject();
         String send(const char* serverUrl, StaticJsonDocument<200>& jsonDoc);
+        String get(const char* serverUrl);
 };
 
 #endif

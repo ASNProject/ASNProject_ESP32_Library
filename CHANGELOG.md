@@ -18,4 +18,5 @@
 
 ### [Unreleased]
 - Create initial project
-- Create POST ESP32 Data to API
+- Add POST ESP32 Data to API
+- Add GET data from API

@@ -16,25 +16,26 @@
 
 ASNProject::ASNProject() {}
 
+// POST Data
 String ASNProject::send(const char* serverUrl, StaticJsonDocument<200>& jsonDoc) {
     if (WiFi.status() == WL_CONNECTED) {
         HTTPClient http;
         http.begin(serverUrl);
         http.addHeader("Content-Type", "application/json");
 
-        // Serialisasi JSON menjadi string
+        // Serialisasi JSON to string
         String jsonData;
         serializeJson(jsonDoc, jsonData);
 
-        // Kirim permintaan POST
+        // send request POST
         int httpResponseCode = http.POST(jsonData);
 
-        // Ambil respons server
+        // Get response server
         String response;
         if (httpResponseCode > 0) {
             response = http.getString();
         } else {
-            response = "Error: " + String(httpResponseCode);
+            response = "Error: " + String(http.errorToString(httpResponseCode));
         }
 
         http.end();
@@ -43,3 +44,25 @@ String ASNProject::send(const char* serverUrl, StaticJsonDocument<200>& jsonDoc)
         return "Error: Wifi not connected.";
     }
 }
+
+// GET Data
+String ASNProject::get(const char* serverUrl) {
+    if (WiFi.status() == WL_CONNECTED) {
+        HTTPClient http;
+        http.begin(serverUrl);
+        int httpResponseCode = http.GET();
+
+        String response;
+        if (httpResponseCode > 0) {
+            response = http.getString();
+        } else {
+            response = "Error: " + String(http.errorToString(httpResponseCode));
+        }
+
+        http.end();
+        return response;
+    } else {
+        return "Error: Wifi not connected.";
+    }
+}
+
