@@ -92,3 +92,24 @@ String ASNProject::update(const char* serverUrl, StaticJsonDocument<200>& jsonDo
     }
 }
 
+/// GET Data by ID
+String ASNProject::getById(const char* serverUrl, char* id) {
+    if (WiFi.status() == WL_CONNECTED) {
+        HTTPClient http;
+        http.begin(String(serverUrl) + "/" + String(id));
+        int httpResponseCode = http.GET();
+
+        String response;
+        if (httpResponseCode > 0) {
+            response = http.getString();
+        } else {
+            response = "Error: " + String(http.errorToString(httpResponseCode));
+        }
+
+        http.end();
+        return response;
+    } else {
+        return "Error: Wifi not connected.";
+    }
+}
+
