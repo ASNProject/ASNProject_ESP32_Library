@@ -15,7 +15,7 @@
 #include "ASNProject.h"
 
 ASNProject::ASNProject() {}
-
+///----- REST API -----///
 // POST Data
 String ASNProject::send(const char* serverUrl, StaticJsonDocument<200>& jsonDoc) {
     if (WiFi.status() == WL_CONNECTED) {
@@ -93,7 +93,7 @@ String ASNProject::update(const char* serverUrl, StaticJsonDocument<200>& jsonDo
 }
 
 /// GET Data by ID
-String ASNProject::getById(const char* serverUrl, char* id) {
+String ASNProject::getById(const char* serverUrl, const char* id) {
     if (WiFi.status() == WL_CONNECTED) {
         HTTPClient http;
         http.begin(String(serverUrl) + "/" + String(id));

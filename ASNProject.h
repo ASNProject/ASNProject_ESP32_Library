@@ -9,10 +9,11 @@
 class ASNProject {
     public:
         ASNProject();
+        // Rest API
         String send(const char* serverUrl, StaticJsonDocument<200>& jsonDoc);
         String get(const char* serverUrl);
         String update(const char* serverUrl, StaticJsonDocument<200>& jsonDoc);
-        String getById(const char* serverUrl, char* id);
+        String getById(const char* serverUrl, const char* id);
 };
 
 #endif
