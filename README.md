@@ -24,7 +24,7 @@ ASNProject ESP32 Library: A comprehensive library designed specifically for the 
     - [x] POST data to api
     - [ ] GET data from api
     - [ ] PUT data to api
-    - [ ] POST data to api by id
+    - [ ] GET data from api by id
     - [ ] DELETE data from api
 <!-- - [x] Capture with webcam
 - [ ] Capture camera using Raspberry Pi 4 camera
