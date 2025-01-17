@@ -13,8 +13,6 @@
 // limitations under the License.
 
 #include <WiFi.h>
-#include <HTTPClient.h>
-#include <ArduinoJson.h>
 #include <ASNProject.h>
 
 // Wi-Fi Credentials
