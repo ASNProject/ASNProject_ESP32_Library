@@ -25,14 +25,20 @@ ASNProject ESP32 Library: A comprehensive library designed specifically for the 
     - [x] GET data from api
     - [x] UPDATE data to api (for api id on body json)
     - [x] GET data from api by id
-<!-- - [x] Capture with webcam
-- [ ] Capture camera using Raspberry Pi 4 camera
+- [x] Stream ESP32CAM
+<!-- - [ ] Capture camera using Raspberry Pi 4 camera
 - [x] Send classification using Telegram -->
 
 ### Use this library
 - Download this project 
 - Extract project
 - Copy folder to Arduino -> Libraries
+
+### Installation Arduino Library Needed
+- HTTPClient
+- ArduinoJson
+- WebServer
+- WiFiClient
 
 <br />
 Enjoy!!!
