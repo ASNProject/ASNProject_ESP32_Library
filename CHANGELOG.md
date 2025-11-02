@@ -16,7 +16,7 @@
 
 ## Changelog Project
 
-### [Unreleased]
+### [v.1.0]
 - Create initial project
 - Add POST ESP32 Data to API
 - Add GET data from API
