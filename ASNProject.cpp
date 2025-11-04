@@ -209,3 +209,87 @@ void ASNProject::handleNotFound() {
   server.send(200, "text/plain", message);
 }
 
+///----- OTA Firmware Update -----///
+bool ASNProject::checkUpdate(const char* updateUrl, double currentVersion) {
+    Serial.println("Checking for firmware update...");
+
+    if (WiFi.status() != WL_CONNECTED) {
+        Serial.println("WiFi not connected!");
+        return false;
+    }
+
+    HTTPClient http;
+    http.begin(updateUrl);
+    int httpCode = http.GET();
+
+    if (httpCode != HTTP_CODE_OK) {
+        Serial.printf("Failed to fetch JSON (HTTP code: %d)\n", httpCode);
+        http.end();
+        return false;
+    }
+
+    String response = http.getString();
+    http.end();
+
+    StaticJsonDocument<512> doc;
+    DeserializationError error = deserializeJson(doc, response);
+    if (error) {
+        Serial.println("Failed to parse JSON!");
+        return false;
+    }
+
+    double newVersion = doc["version"];
+    Serial.printf("Current: %.2f | Available: %.2f\n", currentVersion, newVersion);
+
+    return newVersion > currentVersion;
+}
+
+void ASNProject::updateFirmware(const char* updateUrl) {
+    Serial.println("Fetching update info...");
+
+    if (WiFi.status() != WL_CONNECTED) {
+        Serial.println("WiFi not connected!");
+        return;
+    }
+
+    HTTPClient http;
+    http.begin(updateUrl);
+    int httpCode = http.GET();
+
+    if (httpCode != HTTP_CODE_OK) {
+        Serial.printf("Failed to fetch update info (code %d)\n", httpCode);
+        http.end();
+        return;
+    }
+
+    String response = http.getString();
+    http.end();
+
+    StaticJsonDocument<512> doc;
+    DeserializationError error = deserializeJson(doc, response);
+    if (error) {
+        Serial.println("Failed to parse update JSON!");
+        return;
+    }
+
+    String firmwareUrl = doc["url"];
+    Serial.println("Starting OTA update from: " + firmwareUrl);
+
+    t_httpUpdate_return ret = ESPhttpUpdate.update(firmwareUrl);
+
+    switch (ret) {
+        case HTTP_UPDATE_FAILED:
+            Serial.printf("HTTP_UPDATE_FAILED Error (%d): %s\n",
+                          ESPhttpUpdate.getLastError(),
+                          ESPhttpUpdate.getLastErrorString().c_str());
+            break;
+        case HTTP_UPDATE_NO_UPDATES:
+            Serial.println("HTTP_UPDATE_NO_UPDATES");
+            break;
+        case HTTP_UPDATE_OK:
+            Serial.println("HTTP_UPDATE_OK — Update completed successfully. Rebooting...");
+            break;
+    }
+}
+
+

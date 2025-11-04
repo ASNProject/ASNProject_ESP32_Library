@@ -16,6 +16,9 @@
 
 ## Changelog Project
 
+### [added]
+- Add Firmware update via OTA (Github Version)
+
 ### [v.1.0]
 - Create initial project
 - Add POST ESP32 Data to API

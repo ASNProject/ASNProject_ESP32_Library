@@ -26,6 +26,7 @@ ASNProject ESP32 Library: A comprehensive library designed specifically for the 
     - [x] UPDATE data to api (for api id on body json)
     - [x] GET data from api by id
 - [x] Stream ESP32CAM
+- [x] Update Firmware with OTA (Github Version)
 <!-- - [ ] Capture camera using Raspberry Pi 4 camera
 - [x] Send classification using Telegram -->
 
@@ -39,6 +40,7 @@ ASNProject ESP32 Library: A comprehensive library designed specifically for the 
 - ArduinoJson
 - WebServer
 - WiFiClient
+- ESP32httpUpdate
 
 <br />
 Enjoy!!!

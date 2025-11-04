@@ -8,6 +8,7 @@
 #include <WebServer.h>
 #include <WiFiClient.h>
 #include "OV2640.h"
+#include <ESP32httpUpdate.h>
 
 // Camera settings
 #define PWDN_GPIO_NUM     32
@@ -44,6 +45,10 @@ class ASNProject {
         String get(const char* serverUrl);
         String update(const char* serverUrl, StaticJsonDocument<200>& jsonDoc);
         String getById(const char* serverUrl, const char* id);
+
+        // Firmware OTA
+        bool checkUpdate(const char* updateUrl, double currentVersion);
+        void updateFirmware(const char* updateUrl);
 
         // ESP32Cam Streaming
         String esp32cam();
